@@ -1,0 +1,96 @@
+openapi: 3.0.3
+info:
+  title: Price Query API
+  description: REST API to retrieve applicable product prices based on date, product ID, and brand ID.
+  version: 1.0.0
+servers:
+  - url: http://localhost:8080
+    description: Local development server
+paths:
+  /v1/products/{productId}/price:
+    get:
+      tags:
+        - Product prices
+      summary: Get applicable price for a product
+      description: Retrieves the applicable price for a given product, brand, and date based on priority rules.
+      operationId: getProductPrice
+      parameters:
+        - name: productId
+          in: path
+          required: true
+          description: Product ID to query.
+          schema:
+            type: integer
+            format: int64
+            example:
+              35455
+        - name: date
+          in: query
+          required: true
+          description: Application date and time (ISO-8601 format).
+          schema:
+            type: string
+            format: date-time
+            example: "2020-06-14T10:00:00"
+        - name: brandId
+          in: query
+          required: true
+          description: Brand ID (e.g., 1 for ZARA).
+          schema:
+            type: integer
+            format: int64
+            example: 1
+      responses:
+        "200":
+          description: Successfully retrieved the applicable price.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  productId:
+                    type: integer
+                    format: int64
+                    example: 35455
+                  brandId:
+                    type: integer
+                    format: int64
+                    example: 1
+                  priceList:
+                    type: integer
+                    example: 1
+                  startDate:
+                    type: string
+                    format: date-time
+                    example: "2020-06-14T00:00:00"
+                  endDate:
+                    type: string
+                    format: date-time
+                    example: "2020-12-31T23:59:59"
+                  price:
+                    type: number
+                    format: float
+                    example: 35.50
+                  currency:
+                    type: string
+                    example: "EUR"
+        "400":
+          description: Bad request due to missing or invalid query parameters.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: "Invalid date format. Expected yyyy-MM-dd'T'HH:mm:ss"
+        "404":
+          description: No matching price found for the given parameters.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: "No price found for the specified product, brand, and date."

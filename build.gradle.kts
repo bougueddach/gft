@@ -35,6 +35,7 @@ dependencies {
     implementation("javax.annotation:javax.annotation-api:1.3.2")
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
     implementation("org.openapitools:jackson-databind-nullable:0.2.6")
+    implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.1.0")
     compileOnly("javax.servlet:javax.servlet-api:3.0.1")
     compileOnly("org.projectlombok:lombok")
     runtimeOnly("com.h2database:h2")
@@ -67,8 +68,8 @@ openApiGenerate {
     generatorName.set("kotlin-spring")
     inputSpec.set("$rootDir/api-specs/main.yaml")           // Path to your OpenAPI spec
     outputDir.set("$buildDir/generated")             // Output directory for generated code
-    apiPackage.set("com.malt.generated.api")
-    modelPackage.set("com.malt.generated.model")
+    apiPackage.set("com.gft.generated.api")
+    modelPackage.set("com.gft.generated.model")
     configOptions.set(
         mapOf(
             "interfaceOnly" to "true",               // Generate only interfaces
