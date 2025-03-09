@@ -4,6 +4,6 @@ import com.gft.generated.model.ProductPriceResponse
 import java.time.OffsetDateTime
 
 interface GetProductPricePort {
-    fun getProductPrice(productId: Long, date: OffsetDateTime, brandId: Long, zoneId: String): ProductPriceResponse
+    fun getProductPrice(productId: Long, date: OffsetDateTime, brandId: Long, timeZoneId: String): ProductPriceResponse
 
 }
