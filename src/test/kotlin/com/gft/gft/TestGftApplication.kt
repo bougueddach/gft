@@ -5,5 +5,5 @@ import org.springframework.boot.with
 
 
 fun main(args: Array<String>) {
-	fromApplication<GftApplication>().with(TestcontainersConfiguration::class).run(*args)
+	fromApplication<GftApplication>().run(*args)
 }

@@ -16,4 +16,8 @@ class PriceRepository(
     override fun saveAll(prices: Iterable<Price>): Iterable<Price> {
         return jpaRepository.saveAll(prices)
     }
+
+    override fun deleteAll() {
+        return jpaRepository.deleteAll()
+    }
 }
