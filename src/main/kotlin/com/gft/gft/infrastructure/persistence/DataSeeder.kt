@@ -1,7 +1,7 @@
 package com.gft.gft.infrastructure.persistence
 
+import com.gft.gft.application.port.outbound.PriceRepositoryPort
 import com.gft.gft.domain.model.Price
-import com.gft.gft.infrastructure.persistence.repository.PriceRepository
 import org.springframework.boot.CommandLineRunner
 import org.springframework.context.annotation.Bean
 import org.springframework.stereotype.Component
@@ -10,7 +10,7 @@ import java.time.Instant
 @Component
 class DataSeeder {
     @Bean
-    fun seedData(priceRepository: PriceRepository): CommandLineRunner {
+    fun seedData(priceRepositoryPort: PriceRepositoryPort): CommandLineRunner {
         return CommandLineRunner {
             val prices = listOf(
                 Price(
@@ -54,7 +54,7 @@ class DataSeeder {
                     currency = "EUR"
                 )
             )
-            priceRepository.saveAll(prices)
+            priceRepositoryPort.saveAll(prices)
         }
     }
 }

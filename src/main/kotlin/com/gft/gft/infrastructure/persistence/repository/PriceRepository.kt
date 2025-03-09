@@ -12,4 +12,8 @@ class PriceRepository(
     override fun findApplicablePrices(productId: Long, brandId: Long, date: Instant): List<Price> {
         return jpaRepository.findApplicablePrices(productId, brandId, date)
     }
+
+    override fun saveAll(prices: Iterable<Price>): Iterable<Price> {
+        return jpaRepository.saveAll(prices)
+    }
 }
