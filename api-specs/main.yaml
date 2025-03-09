@@ -59,21 +59,15 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  error:
-                    type: string
-                    example: "Invalid date format. Expected yyyy-MM-dd'T'HH:mm:ss"
+                $ref: "#/components/schemas/ErrorResponse"
+
         "404":
           description: No matching price found for the given parameters.
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  error:
-                    type: string
-                    example: "No price found for the specified product, brand, and date."
+                $ref: "#/components/schemas/ErrorResponse"
+
 
 
 components:
@@ -107,3 +101,15 @@ components:
         currency:
           type: string
           example: "EUR"
+    ErrorResponse:
+      type: object
+      properties:
+        status:
+          type: integer
+          example: 400
+        error:
+          type: string
+          example: "Bad Request"
+        message:
+          type: string
+          example: "Invalid date format. Expected yyyy-MM-dd'T'HH:mm:ss"
