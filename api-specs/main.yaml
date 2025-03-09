@@ -40,6 +40,12 @@ paths:
             type: integer
             format: int64
             example: 1
+        - name: x-timezone
+          in: header
+          required: true
+          schema:
+            type: string
+            example: "Europe/Madrid"
       responses:
         "200":
           description: Successfully retrieved the applicable price.
@@ -47,33 +53,7 @@ paths:
             application/json:
               schema:
                 type: object
-                properties:
-                  productId:
-                    type: integer
-                    format: int64
-                    example: 35455
-                  brandId:
-                    type: integer
-                    format: int64
-                    example: 1
-                  priceList:
-                    type: integer
-                    example: 1
-                  startDate:
-                    type: string
-                    format: date-time
-                    example: "2020-06-14T00:00:00"
-                  endDate:
-                    type: string
-                    format: date-time
-                    example: "2020-12-31T23:59:59"
-                  price:
-                    type: number
-                    format: float
-                    example: 35.50
-                  currency:
-                    type: string
-                    example: "EUR"
+                $ref: "#/components/schemas/ProductPriceResponse"
         "400":
           description: Bad request due to missing or invalid query parameters.
           content:
@@ -94,3 +74,36 @@ paths:
                   error:
                     type: string
                     example: "No price found for the specified product, brand, and date."
+
+
+components:
+  schemas:
+    ProductPriceResponse:
+      type: object
+      properties:
+        productId:
+          type: integer
+          format: int64
+          example: 35455
+        brandId:
+          type: integer
+          format: int64
+          example: 1
+        priceList:
+          type: integer
+          example: 1
+        startDate:
+          type: string
+          format: date-time
+          example: "2020-06-14T00:00:00Z"
+        endDate:
+          type: string
+          format: date-time
+          example: "2020-12-31T23:59:59Z"
+        price:
+          type: number
+          format: double
+          example: 35.50
+        currency:
+          type: string
+          example: "EUR"
