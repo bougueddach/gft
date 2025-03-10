@@ -14,6 +14,7 @@ It follows Hexagonal Architecture principles, using Spring Boot, Kotlin, H2 (in-
 
 #### Using Gradle to start the application on port 8080
 ```sh
+./gradlew clean openApiGenerate // to generate the open api schema
 ./gradlew bootRun
 ```
 
